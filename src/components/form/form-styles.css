@@ -14,7 +14,8 @@
     border: 2px solid tan;
     padding: 50px;
     border-radius: 1em;
-    width: 500px;
+    width: 70%;
+    height: 75vh;
     box-shadow: 5px 5px 5px grey;
 }
 
@@ -25,10 +26,16 @@ button{
 .cardInputContainer{
     margin-top: 25px;
     height: 50px;
+    border: 1px solid aqua;
 }
 
 .cardInput{
-    background-color: aqua;
+    /* background-color: aqua; */
     height: 50px;
-    font-size: x-large;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
