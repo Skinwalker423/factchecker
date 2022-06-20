@@ -1,24 +1,19 @@
-import Navbar from './components/navbar/navbar-component';
+import Navbar from './routes/navbar/navbar-component';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import Donations from './routes/donations/donations-component';
+import Home from './routes/home/home-component';
 import './App.css';
 
 const App = () => {
   return (
     <div className="App">
-      <Navbar />
-      <header className="App-header">
-        <img src={'./check.png'} className="App-logo" alt="logo" />
-        <p className='title'>
-          <span className='fact'>FACT</span><span className='checker'>CHECKER</span><span className='lol'>.LOL</span>
-        </p>
-        <a
-          className="App-link"
-          href="/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Coming Soon
-        </a>
-      </header>
+      <Routes>
+        <Route path='/' element={<Navbar />}>
+            <Route index element={<Home />} />
+            <Route path='donations' element={<Donations />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
