@@ -1,6 +1,5 @@
 import Navbar from './routes/navbar/navbar-component';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { Link } from "react-router-dom";
+import { Routes, Route} from 'react-router-dom';
 import Donations from './routes/donations/donations-component';
 import Home from './routes/home/home-component';
 import './App.css';
