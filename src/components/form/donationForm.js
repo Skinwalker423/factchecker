@@ -15,7 +15,31 @@ const DonationForm = () => {
         return;
         }
 
-        
+        const response = await fetch('/.netlify/functions/create-payment-intent', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({amount: 5000})
+        }).then(res => res.json())
+
+        const clientSecret = response.paymentIntent.client_secret;
+
+        const paymentResult = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: elements.getElement(CardElement),
+                billing_details: {
+                    name: "John Wick",
+                }
+            }
+        })
+
+        if(paymentResult.error){
+            alert(paymentResult.error)
+        }
+        if(paymentResult.paymentIntent.status === 'succeeded'){
+            alert('payment successful')
+        }
 
     }
 
@@ -38,7 +62,7 @@ const DonationForm = () => {
 
     return (
         <div className="container donationBody">
-        <form className="donationForm">
+        <form onSubmit={paymentFormHandler} className="donationForm">
             <h1>Donation Form</h1>
             <section className="form-group">
                 <label htmlFor="firstName">First Name</label>

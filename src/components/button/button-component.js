@@ -2,7 +2,7 @@
 
 const Button = ({theme, title}) => {
     return(
-        <button type="button" className={`btn btn-${theme || 'primary'}`}>{title}</button>
+        <button type="submit" className={`btn btn-${theme || 'primary'}`}>{title}</button>
     )
 }
 
