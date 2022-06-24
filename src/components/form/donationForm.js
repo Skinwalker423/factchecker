@@ -1,12 +1,23 @@
 import Button from "../button/button-component";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useState } from "react";
+import { useElements, useStripe, CardElement } from "@stripe/react-stripe-js";
 import './form-styles.css';
 
 
 const DonationForm = () => {
 
+    const [fullName, setFullName] = useState('Guest');
+    const [amount, setAmount] = useState(0);
+
     const stripe = useStripe();
     const elements = useElements();
+
+    const onNameChangeHandler = (e) => {
+        setFullName(e.target.value)
+    }
+    const onAmountChangeHandler = (e) => {
+        setAmount(e.target.value)
+    }
 
     const paymentFormHandler = async (e) => {
         e.preventDefault();
@@ -20,25 +31,26 @@ const DonationForm = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({amount: 5000})
+            body: JSON.stringify({amount: amount * 100})
         }).then(res => res.json())
 
         const clientSecret = response.paymentIntent.client_secret;
 
-        const paymentResult = await stripe.confirmCardPayment(clientSecret, {
+        const {paymentIntent, error} = await stripe.confirmCardPayment(clientSecret,{
             payment_method: {
                 card: elements.getElement(CardElement),
                 billing_details: {
-                    name: "John Wick",
+                    name: fullName
                 }
             }
         })
 
-        if(paymentResult.error){
-            alert(paymentResult.error)
+        if(error){
+            alert(error)
         }
-        if(paymentResult.paymentIntent.status === 'succeeded'){
-            alert('payment successful')
+        if(paymentIntent.status === 'succeeded'){
+            console.log(fullName, amount);
+            alert('payment successful');
         }
 
     }
@@ -65,16 +77,12 @@ const DonationForm = () => {
         <form onSubmit={paymentFormHandler} className="donationForm">
             <h1>Donation Form</h1>
             <section className="form-group">
-                <label htmlFor="firstName">First Name</label>
-                <input placeholder="John" className="form-control" name="firstName" type={'text'} />
-            </section>
-            <section className="form-group">
-                <label htmlFor="lastName">Last Name</label>
-                <input placeholder="Doe" className="form-control" name="lastName" type={'text'} />
+                <label htmlFor="fullName">Full Name</label>
+                <input onChange={onNameChangeHandler} placeholder="John" className="form-control" name="fullName" type={'text'} />
             </section>
             <section className="form-group">
                 <label htmlFor="address">Amount</label>
-                <input placeholder="20.00" className="form-control" name="address" type={'number'} />
+                <input onChange={onAmountChangeHandler} placeholder="20.00" className="form-control" name="address" type={'number'} />
             </section>
             <div className="cardInputContainer">
                 <CardElement className="cardInput" options={{
