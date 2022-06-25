@@ -1,5 +1,5 @@
 import Button from "../button/button-component";
-import { auth, signInWithGooglePopup, addUserDocFromAuth } from "../../utils/firebase/firebase.utils";
+import {signInWithGooglePopup, addUserDocFromAuth } from "../../utils/firebase/firebase.utils";
 
 
 const SignInForm = () => {

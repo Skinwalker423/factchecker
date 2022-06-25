@@ -64,16 +64,6 @@ export const addUserDocFromAuth = async (authUser) => {
     }
 
     return userDocRef;
-
-
-
-    //   const docRef = await addDoc(collection(db, "users"), {
-    //   displayName: authUser.displayName,
-    //   email: authUser.email,
-    //   id: authUser.uid
-
-    // });
-    console.log("Document written with ID: ");
   } catch (e) {
     console.error("Error adding document: ", e);
   }
