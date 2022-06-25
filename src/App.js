@@ -4,8 +4,15 @@ import Donations from './routes/donations/donations-component';
 import Home from './routes/home/home-component';
 import './App.css';
 import Authorization from './routes/authorication/authorization-component';
+import { useEffect } from 'react';
 
 const App = () => {
+
+  useEffect(() => {
+    
+
+  }, [])
+
   return (
     <div className="App">
       <Routes>

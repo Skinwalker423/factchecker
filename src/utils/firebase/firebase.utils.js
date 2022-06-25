@@ -1,12 +1,9 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
-import { 
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signInWithPopup,
-    signInWithRedirect,
-    GoogleAuthProvider,
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -37,47 +34,47 @@ provider.setCustomParameters({
 
 export const auth = getAuth(app);
 
-export const signInWithGooglePopup = async() => {
-     const result = await signInWithPopup(auth, provider);
-     return result;
-  
+export const signInWithGooglePopup = async () => {
+  const result = await signInWithPopup(auth, provider);
+  return result;
+
 }
 
 export const addUserDocFromAuth = async (authUser) => {
 
   try {
 
-    const userDocRef =  doc(db, "users", authUser.uid );
+    const userDocRef = doc(db, "users", authUser.uid);
 
     const userSnapshot = await getDoc(userDocRef);
 
 
-    if(!userSnapshot.exists()){
-        const {displayName, email} = authUser;
-        const createdAt = new Date();
-        try{
-          await setDoc(userDocRef, {
-            displayName: displayName,
-            email: email,
-            createdAt
+    if (!userSnapshot.exists()) {
+      const { displayName, email } = authUser;
+      const createdAt = new Date();
+      try {
+        await setDoc(userDocRef, {
+          displayName: displayName,
+          email: email,
+          createdAt
         })
-        }catch(e){
-          console.log('error setting doc',e)
-        }
+      } catch (e) {
+        console.log('error setting doc', e)
+      }
     }
 
     return userDocRef;
 
 
 
-  //   const docRef = await addDoc(collection(db, "users"), {
-  //   displayName: authUser.displayName,
-  //   email: authUser.email,
-  //   id: authUser.uid
+    //   const docRef = await addDoc(collection(db, "users"), {
+    //   displayName: authUser.displayName,
+    //   email: authUser.email,
+    //   id: authUser.uid
 
-  // });
-  console.log("Document written with ID: ");
-} catch (e) {
-  console.error("Error adding document: ", e);
-}
+    // });
+    console.log("Document written with ID: ");
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
 }
