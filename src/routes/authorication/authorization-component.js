@@ -1,12 +1,14 @@
 import './authorization-styles.scss';
 import SignInForm from '../../components/sign-in-form/sign-in-component';
+import SignUpForm from '../../components/sign-up-form/sign-up-component';
+import Container from 'react-bootstrap/esm/Container';
 
 const Authorization = () => {
     return (
-        <div className='auth-forms container'>
+        <Container className='d-flex justify-content-evenly mt-5 align-items-start'>
             <SignInForm />
-            <div>Sign Up Form</div>
-        </div>
+            <SignUpForm />
+        </Container>
     )
 }
 
