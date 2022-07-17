@@ -4,9 +4,9 @@ import { Outlet, Link } from "react-router-dom";
 
 const Navbar = () => {
     return(
-        <>
-        <nav className="navbar navbar-expand-lg bg-light">
-            <div className="container-fluid">
+        <div>
+        <nav className="navbar navbar-expand-sm bg-light d-flex justify-content-between align-items-center justify-content-center">
+            <div className="d-flex">
                 <div className="brand-container">
                     <a className="navbar-brand" href="/">FACTCHECKER</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +42,7 @@ const Navbar = () => {
             </div>
         </nav>
         <Outlet />
-        </>
+        </div>
     )
 }
 

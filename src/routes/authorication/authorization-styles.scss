@@ -1,7 +1,13 @@
 .auth-forms{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    margin-top: 50px;
+}
 
+@media (max-width: 500px) {
+    .auth-forms{
+        flex-direction: column;
+        height: 80vh;
+        justify-content: space-evenly;
+    }
 }
