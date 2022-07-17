@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import FormButton from "../button/button-component";
+import { useRef } from "react";
 import './sign-up-styles.scss';
 import { Card, Button, Form, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -43,8 +42,8 @@ const SignUpForm = () => {
     }
 
     return (
-        <Container>
-            <Card>
+        <Container className="w-100" style={{style: 'minHeight: 40vh'}}>
+            <Card style={{style: 'maxWidth: 400px'}}>
                 <Card.Body>
                     <h3 className="text-center">Sign UP</h3>
                     <Form className="" onSubmit={formHandler}>

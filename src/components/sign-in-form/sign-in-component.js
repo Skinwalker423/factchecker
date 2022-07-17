@@ -39,6 +39,7 @@ const SignInForm = () => {
                             <Form.Control className="form-control" name="password" type={'password'}/>
                         </Form.Group>
                         <Button className="w-100 mt-3">Sign In</Button>
+                        <FormButton title='Sign In With Google' theme={'outline-primary'} onGoogleClick={logInGoogleUser}  />
                     </Form>
                 </Card.Body>
             </Card>

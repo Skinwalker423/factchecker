@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/esm/Container';
 
 const Authorization = () => {
     return (
-        <Container className='d-flex justify-content-evenly mt-5 align-items-start'>
+        <Container className='d-flex flex-column-md  justify-content-evenly mt-5 align-items-start auth-forms'>
             <SignInForm />
             <SignUpForm />
         </Container>

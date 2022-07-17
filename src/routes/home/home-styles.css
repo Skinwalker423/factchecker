@@ -1,0 +1,46 @@
+.home-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.fact {
+    color: blue;
+}
+
+.lol {
+    color: red;
+}
+
+.checker {
+    color: white;
+}
+
+.title {
+    background-color: rgba(0, 0, 0, .4);
+    font-size: xx-large;
+    border-radius: 5px;
+    font-weight: 900;
+
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+.App-header {
+    background-color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
