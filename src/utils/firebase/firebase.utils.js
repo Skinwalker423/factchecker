@@ -6,7 +6,6 @@ import {
   GoogleAuthProvider,
   signInWithRedirect,
   getRedirectResult,
-  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 
 } from "firebase/auth";
@@ -65,17 +64,17 @@ export const signInWithGoogleRedirect = async () => {
 
 }
 
+export const signUpWithEmailAndPassword = (email, password) => {
+    createUserWithEmailAndPassword(auth, email, password);
+}
+
 
 
 export const addUserDocFromAuth = async (authUser) => {
 
   try {
-
     const userDocRef = doc(db, "users", authUser.uid);
-
     const userSnapshot = await getDoc(userDocRef);
-
-
     if (!userSnapshot.exists()) {
       const { displayName, email } = authUser;
       const createdAt = new Date();
@@ -89,8 +88,8 @@ export const addUserDocFromAuth = async (authUser) => {
         console.log('error setting doc', e)
       }
     }
-
     return userDocRef;
+
   } catch (e) {
     console.error("Error adding document: ", e);
   }

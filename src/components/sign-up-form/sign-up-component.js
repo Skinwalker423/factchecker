@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useRef, useState} from "react";
 import './sign-up-styles.scss';
 import { Card, Button, Form, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 
 const SignUpForm = () => {
@@ -10,6 +11,9 @@ const SignUpForm = () => {
     const usernameRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmationRef = useRef();
+
+    const {signUp } = useAuth();
+    const [error, setError] = useState('');
 
     // useEffect(() => {
     //     const redirectResponse = async() => {
@@ -23,8 +27,19 @@ const SignUpForm = () => {
 
     // }, [])
 
-    const formHandler = (e) => {
+    const formHandler = async(e) => {
         e.preventDefault();
+
+        if(passwordRef.current.value !== passwordConfirmationRef.current.value){
+            return setError('passwords do not match');
+        }
+        try{
+            setError('');
+            await signUp(emailRef.current.value, passwordRef.current.value);
+        }catch(e){
+            setError(`failed to create an account: ${e.message}`);
+            console.log(error);
+        }
     }
 
     // const logIn = async() => {
@@ -37,9 +52,10 @@ const SignUpForm = () => {
     //     signInWithGoogleRedirectPractice();
     // }
 
-    const signUpWithEmailAndPasswordHandle = () => {
-        console.log('submitted')
-    }
+    // const signUpWithEmailAndPasswordHandle = () => {
+    //     signUp()
+    //     console.log('submitted')
+    // }
 
     return (
         <Container className="w-100" style={{style: 'minHeight: 40vh'}}>
@@ -63,7 +79,7 @@ const SignUpForm = () => {
                             <Form.Label id='confirmPassord' ref={passwordConfirmationRef}>confirm password</Form.Label>
                             <Form.Control type={'password'} required />
                         </Form.Group>
-                        <Button className="w-100 mt-3"  type='submit' onClick={signUpWithEmailAndPasswordHandle}>Submit</Button>
+                        <Button className="w-100 mt-3"  type='submit'>Submit</Button>
                     </Form>
                 </Card.Body>
             </Card>

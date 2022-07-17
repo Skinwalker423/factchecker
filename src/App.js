@@ -5,6 +5,7 @@ import Home from './routes/home/home-component';
 import './App.css';
 import Authorization from './routes/authorication/authorization-component';
 import { useEffect } from 'react';
+import { AuthProvider } from './context/AuthContext';
 
 const App = () => {
 
@@ -14,15 +15,17 @@ const App = () => {
   }, [])
 
   return (
-    <div className="App">
-      <Routes>
-        <Route path='/' element={<Navbar />}>
-            <Route index element={<Home />} />
-            <Route path='donations' element={<Donations />} />
-            <Route path='authorization' element={<Authorization />} />
-        </Route>
-      </Routes>
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Routes>
+          <Route path='/' element={<Navbar />}>
+              <Route index element={<Home />} />
+              <Route path='donations' element={<Donations />} />
+              <Route path='authorization' element={<Authorization />} />
+          </Route>
+        </Routes>
+      </div>
+    </AuthProvider>
   );
 }
 
