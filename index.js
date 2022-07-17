@@ -6,7 +6,7 @@ import './index.css';
 import App from './App';
 import { stripePromise, options } from './utils/stripe/stripe.utils';
 // import reportWebVitals from './reportWebVitals';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
