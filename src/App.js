@@ -18,7 +18,7 @@ const App = () => {
     <AuthProvider>
       <div className="App">
         <Routes>
-          <Route path='/' element={<Navbar />}>
+          <Route exact path='/' element={<Navbar />}>
               <Route index element={<Home />} />
               <Route path='donations' element={<Donations />} />
               <Route path='authorization' element={<Authorization />} />

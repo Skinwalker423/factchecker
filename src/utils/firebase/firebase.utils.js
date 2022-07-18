@@ -7,7 +7,8 @@ import {
   signInWithRedirect,
   getRedirectResult,
   createUserWithEmailAndPassword,
-  signOut
+  signOut,
+  signInWithEmailAndPassword
 
 } from "firebase/auth";
 
@@ -103,6 +104,17 @@ export const signUpWithEmailAndPassword = (email, password) => {
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
+    })
+    .catch((e) => {
+      console.log(e.message);
+    })
+}
+export const logInWithEmailAndPassword = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log("signed in", user);
+      return user;
     })
     .catch((e) => {
       console.log(e.message);
