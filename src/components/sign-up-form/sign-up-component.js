@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import './sign-up-styles.scss';
 import { Card, Button, Form, Container, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
-import { addUserDocFromAuth, auth } from "../../utils/firebase/firebase.utils";
 
 
 const SignUpForm = () => {
@@ -16,7 +15,7 @@ const SignUpForm = () => {
 
     const navigate = useNavigate();
 
-    const {signUp, currentUser, setUserName, addAuthToFirebase, userName } = useAuth();
+    const {signUp, setUserName } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -35,7 +34,6 @@ const SignUpForm = () => {
             setLoading(true);
             setUserName(usernameRef.current.value);
             await signUp(emailRef.current.value, passwordRef.current.value);
-            // await addAuthToFirebase(auth.currentUser, usernameRef);
             console.log('successfully signed up');
             navigate('/');
     
@@ -46,20 +44,6 @@ const SignUpForm = () => {
         setLoading(false);
     }
 
-    // const logIn = async() => {
-    //     const {user} = await signInWithGooglePopupPractice();
-    //     const userDocRef = await createUserDocFromAuthPrac(user);
-    //     console.log('userDocRef:', userDocRef);
-    // }
-
-    // const logInwithRedirect = async() => {
-    //     signInWithGoogleRedirectPractice();
-    // }
-
-    // const signUpWithEmailAndPasswordHandle = () => {
-    //     signUp()
-    //     console.log('submitted')
-    // }
 
     return (
         <Container className="w-100" style={{style: 'minHeight: 40vh'}}>

@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import './home-styles.css';
-import { useAuth } from "../../context/AuthContext";
+
 
 
 const Home = () => {
