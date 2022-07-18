@@ -1,8 +1,9 @@
-import { useRef, useState} from "react";
+import {useRef, useState} from "react";
 import './sign-up-styles.scss';
-import { Card, Button, Form, Container } from "react-bootstrap";
+import { Card, Button, Form, Container, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router";
 
 
 const SignUpForm = () => {
@@ -12,74 +13,62 @@ const SignUpForm = () => {
     const passwordRef = useRef();
     const passwordConfirmationRef = useRef();
 
-    const {signUp } = useAuth();
+    const navigate = useNavigate();
+
+    const {signUp, setUserName } = useAuth();
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    // useEffect(() => {
-    //     const redirectResponse = async() => {
-    //         const response = await getRedirectResult(auth);
-    //         if(response){
-    //             const userDocRef = await createUserDocFromAuthPrac(response.user);
-    //             console.log(userDocRef);
-    //         }
-    //     }
-    //     redirectResponse();
 
-    // }, [])
 
     const formHandler = async(e) => {
         e.preventDefault();
 
         if(passwordRef.current.value !== passwordConfirmationRef.current.value){
+            console.log(passwordRef.current.value, passwordConfirmationRef)
             return setError('passwords do not match');
         }
+
         try{
             setError('');
+            setLoading(true);
+            setUserName(usernameRef.current.value);
             await signUp(emailRef.current.value, passwordRef.current.value);
+            console.log('successfully signed up');
+            navigate('/');
+    
         }catch(e){
             setError(`failed to create an account: ${e.message}`);
             console.log(error);
         }
+        setLoading(false);
     }
 
-    // const logIn = async() => {
-    //     const {user} = await signInWithGooglePopupPractice();
-    //     const userDocRef = await createUserDocFromAuthPrac(user);
-    //     console.log('userDocRef:', userDocRef);
-    // }
-
-    // const logInwithRedirect = async() => {
-    //     signInWithGoogleRedirectPractice();
-    // }
-
-    // const signUpWithEmailAndPasswordHandle = () => {
-    //     signUp()
-    //     console.log('submitted')
-    // }
 
     return (
         <Container className="w-100" style={{style: 'minHeight: 40vh'}}>
             <Card style={{style: 'maxWidth: 400px'}}>
                 <Card.Body>
                     <h3 className="text-center">Sign UP</h3>
+                    {error && <Alert variant="danger">{error}</Alert>}
                     <Form className="" onSubmit={formHandler}>
-                        <Form.Group id='username'>
+                        <Form.Group id='displayName'>
                             <Form.Label>username</Form.Label>
-                            <Form.Control type={'text'} ref={usernameRef} required />
+                            <Form.Control name='displayName' autoComplete="true" type={'text'} ref={usernameRef} required />
                         </Form.Group>
                         <Form.Group id='email'>
                             <Form.Label>email</Form.Label>
-                            <Form.Control type={'text'} ref={emailRef} required />
+                            <Form.Control name="email" autoComplete="true" type={'text'} ref={emailRef} required />
                         </Form.Group>
-                        <Form.Group id='passord'>
+                        <Form.Group id='password'>
                             <Form.Label>password</Form.Label>
-                            <Form.Control type={'password'} ref={passwordRef} required />
+                            <Form.Control name='password' autoComplete="true" type={'password'} ref={passwordRef} required />
                         </Form.Group>
-                        <Form.Group>
-                            <Form.Label id='confirmPassord' ref={passwordConfirmationRef}>confirm password</Form.Label>
-                            <Form.Control type={'password'} required />
+                        <Form.Group id='confirmPassword'>
+                            <Form.Label>confirm password</Form.Label>
+                            <Form.Control name='confirmPassword' ref={passwordConfirmationRef} autoComplete="true" type={'password'} required />
                         </Form.Group>
-                        <Button className="w-100 mt-3"  type='submit'>Submit</Button>
+                        <Button disabled={loading} className="w-100 mt-3"  type='submit'>Submit</Button>
                     </Form>
                 </Card.Body>
             </Card>

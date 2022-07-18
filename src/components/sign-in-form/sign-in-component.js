@@ -32,11 +32,11 @@ const SignInForm = () => {
                         <h3 className="text-center">Sign In</h3>
                         <Form.Group id='email' className="form-group">
                             <Form.Label htmlFor="email">email</Form.Label>
-                            <Form.Control className="form-control" name="email" type={'text'}/>
+                            <Form.Control autoComplete="true" className="form-control" name="email" type={'text'}/>
                         </Form.Group>
                         <Form.Group id='password' className="form-group">
                             <Form.Label htmlFor="email">password</Form.Label>
-                            <Form.Control className="form-control" name="password" type={'password'}/>
+                            <Form.Control autoComplete="true" className="form-control" name="password" type={'password'}/>
                         </Form.Group>
                         <Button className="w-100 mt-3">Sign In</Button>
                         <FormButton title='Sign In With Google' theme={'outline-primary'} onGoogleClick={logInGoogleUser}  />
