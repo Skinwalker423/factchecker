@@ -7,6 +7,7 @@ import {
   signInWithRedirect,
   getRedirectResult,
   createUserWithEmailAndPassword,
+  signOut
 
 } from "firebase/auth";
 
@@ -64,19 +65,21 @@ export const signInWithGoogleRedirect = async () => {
 
 }
 
-export const signUpWithEmailAndPassword = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password);
+
+
+export const logOut = () => {
+    signOut(auth);
 }
 
 
 
-export const addUserDocFromAuth = async (authUser) => {
+export const addUserDocFromAuth = async (authUser, userName ) => {
 
   try {
     const userDocRef = doc(db, "users", authUser.uid);
     const userSnapshot = await getDoc(userDocRef);
     if (!userSnapshot.exists()) {
-      const { displayName, email } = authUser;
+      const { displayName = userName, email } = authUser;
       const createdAt = new Date();
       try {
         await setDoc(userDocRef, {
@@ -93,4 +96,15 @@ export const addUserDocFromAuth = async (authUser) => {
   } catch (e) {
     console.error("Error adding document: ", e);
   }
+}
+
+export const signUpWithEmailAndPassword = (email, password) => {
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+    })
+    .catch((e) => {
+      console.log(e.message);
+    })
 }

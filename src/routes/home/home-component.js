@@ -1,11 +1,13 @@
 import { Container } from "react-bootstrap";
 import './home-styles.css';
+import { useAuth } from "../../context/AuthContext";
 
 
 const Home = () => {
+
     return (
         <Container className="home-container" >
-            <header className="App-header">
+            <header className="home-header">
                 <img src={'./check.png'} className="App-logo" alt="logo" />
                 <p className='title'>
                 <span className='fact'>FACT</span><span className='checker'>CHECKER</span><span className='lol'>.LOL</span>
