@@ -1,8 +1,8 @@
 
 
-const FormButton = ({theme, title, onGoogleClick}) => {
+const FormButton = ({theme, title, disabled }) => {
     return(
-        <button onClick={onGoogleClick} type="submit" className={`w-100 mt-3 btn btn-${theme || 'primary'}`}>{title}</button>
+        <button disabled={disabled} type="submit" className={`w-100 mt-3 btn btn-${theme || 'primary'}`}>{title}</button>
     )
 }
 

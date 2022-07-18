@@ -1,8 +1,13 @@
 import React from "react";
 import './navbar-style.css';
 import { Outlet, Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { logOut } from "../../utils/firebase/firebase.utils";
 
 const Navbar = () => {
+
+    const {currentUser, setCurrentUser} = useAuth();
+
     return(
         <div>
         <nav className="navbar navbar-expand-sm bg-light d-flex justify-content-between align-items-center justify-content-center">
@@ -16,7 +21,7 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="/">HOME</a>
+                    <a className="nav-link" aria-current="page" href="/">HOME</a>
                     </li>
                     <li className="nav-item">
                     <a className="nav-link" href="/">ABOUT US</a>
@@ -38,7 +43,10 @@ const Navbar = () => {
                 </div>
             </div>
             <div>
-                <Link className="nav-link" to={'/authorization'}>Sign In</Link>
+                {currentUser ? <Link onClick={() => {
+                    logOut();
+                    setCurrentUser(null);
+                }} className="nav-link" to={'/'}>Log Out</Link> : <Link className="nav-link" to={'/authorization'}>Sign In</Link> }
             </div>
         </nav>
         <Outlet />
