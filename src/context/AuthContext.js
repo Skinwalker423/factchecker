@@ -27,7 +27,7 @@ export const AuthProvider = ({children}) => {
         })
 
         return unsubscribe;
-    },[userName])
+    },[])
 
     const addAuthToFirebase = async(currentUser, userName) => {
         await addUserDocFromAuth(currentUser, userName);

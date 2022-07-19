@@ -7,17 +7,23 @@ import App from './App';
 import { stripePromise, options } from './utils/stripe/stripe.utils';
 // import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { AuthProvider } from './context/AuthContext';
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 
 
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Elements stripe={stripePromise} options={options}>
-        <App />
-      </Elements>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Elements stripe={stripePromise} options={options}>
+          <App />
+        </Elements>
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>
 );
 

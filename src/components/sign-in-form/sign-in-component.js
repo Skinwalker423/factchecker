@@ -4,6 +4,7 @@ import FormButton from "../button/button-component";
 import {signInWithGooglePopup, addUserDocFromAuth, auth } from "../../utils/firebase/firebase.utils";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Card, Button, Form, Container, Alert } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 
 
@@ -53,7 +54,7 @@ const SignInForm = () => {
             setLoading(false);
         }
         console.log(authDocRef);
-        navigate('/');
+        navigate('/dashboard');
     }
 
     return(
@@ -74,6 +75,9 @@ const SignInForm = () => {
                         <Button disabled={loading} onClick={signInHandler} className="w-100 mt-3">Sign In</Button>
                     </Form>
                     <FormButton disabled={loading} title='Sign In With Google' theme={'outline-primary'} onGoogleClick={logInGoogleUser}  />
+                    <div className="w-100 text-center mt-2">
+                        <Link to={'/forgotpassword'}>Forgot Password?</Link>
+                    </div>
                 </Card.Body>
             </Card>
         </Container>
