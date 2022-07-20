@@ -8,6 +8,11 @@ const Navbar = () => {
 
     const {currentUser, setCurrentUser} = useAuth();
 
+    const handleLogOut = () => {
+        logOut();
+        setCurrentUser(null);
+    }
+
     return(
         <div>
         <nav className="navbar navbar-expand-sm bg-light d-flex justify-content-between align-items-center justify-content-center">
@@ -42,11 +47,13 @@ const Navbar = () => {
                 </ul>
                 </div>
             </div>
-            <div>
-                {currentUser ? <Link onClick={() => {
-                    logOut();
-                    setCurrentUser(null);
-                }} className="nav-link" to={'/'}>Log Out</Link> : <Link className="nav-link" to={'/authorization'}>Sign In</Link> }
+            <div className="d-flex ">
+                <div>
+                    {currentUser && <Link className="nav-link" to={'/dashboard'}>Profile</Link>}
+                </div>
+                <div>
+                    {currentUser ? <Link onClick={handleLogOut} className="nav-link" to={'/'}>Log Out</Link> : <Link className="nav-link" to={'/authorization'}>Sign In</Link> }
+                </div>
             </div>
         </nav>
         <Outlet />
