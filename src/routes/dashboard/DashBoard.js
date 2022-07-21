@@ -3,17 +3,22 @@ import { useState } from "react";
 import { Card, Button, Container, Alert } from "react-bootstrap";
 import { useAuth } from "../../context/AuthContext";
 import { logOut } from "../../utils/firebase/firebase.utils";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const DashBoard = () => {
 
     const [error, setError] = useState('');
     const {currentUser, setCurrentUser} = useAuth();
-    console.log(currentUser);
+    const navigate = useNavigate();
 
     const handleLogOut = () => {
-        logOut();
-        setCurrentUser(null);
+        try{
+            logOut();
+            setCurrentUser(null);
+            navigate('/');
+        }catch(e){
+            setError(e.message);
+        }
     }
 
 

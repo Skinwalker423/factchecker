@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 90vh;
 }
 
 .fact {
@@ -14,22 +14,22 @@
 }
 
 .checker {
-    color: white;
+    color: rgb(216, 200, 200);
+    /* background-color: rgba(0, 0, 0, .1); */
 }
 
 .title {
-    background-color: rgba(0, 0, 0, .4);
+    /* background-color: rgba(0, 0, 0, .15); */
     font-size: xx-large;
     border-radius: 5px;
     font-weight: 900;
-
+    text-align: center;
+    margin-top: 8%;
 }
 
 
 
-.App-header {
-    background-color: white;
-    min-height: 100vh;
+.home-header {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,3 +42,7 @@
     height: 40vmin;
     pointer-events: none;
 }
+
+/* .App-link{
+    
+} */

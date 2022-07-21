@@ -1,16 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 import './navbar-style.css';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { logOut } from "../../utils/firebase/firebase.utils";
+import { Alert } from "react-bootstrap";
 
 const Navbar = () => {
 
     const {currentUser, setCurrentUser} = useAuth();
+    const [error, setError] = useState('')
+    const navigate = useNavigate();
 
     const handleLogOut = () => {
-        logOut();
-        setCurrentUser(null);
+        try{
+            logOut();
+            setCurrentUser(null);
+            navigate('/');
+        }catch(e){
+            setError(e.message);
+        }
     }
 
     return(
@@ -56,6 +64,7 @@ const Navbar = () => {
                 </div>
             </div>
         </nav>
+        {error && <Alert variant="danger">{error}</Alert>}
         <Outlet />
         </div>
     )

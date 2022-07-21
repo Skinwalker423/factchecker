@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import ForgotPassword from './routes/forgotPassword/forgotPassword';
 import DashBoard from './routes/dashboard/DashBoard';
 import { useAuth } from './context/AuthContext';
+import NavbarTwo from './routes/navbar/nav-react-component';
 
 const App = () => {
 
@@ -21,7 +22,7 @@ const App = () => {
   return (
       <div className="App">
         <Routes>
-          <Route exact path='/' element={<Navbar />}>
+          <Route exact path='/' element={<NavbarTwo />}>
               <Route index element={<Home />} />
               <Route path='/dashboard' element={currentUser ? <DashBoard /> : <Authorization />} />
               <Route path='donations' element={<Donations />} />
