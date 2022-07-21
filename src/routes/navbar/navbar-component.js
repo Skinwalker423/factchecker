@@ -1,12 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
 import './navbar-style.css';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { logOut } from "../../utils/firebase/firebase.utils";
+import { Alert } from "react-bootstrap";
 
 const Navbar = () => {
 
     const {currentUser, setCurrentUser} = useAuth();
+    const [error, setError] = useState('')
+    const navigate = useNavigate();
+
+    const handleLogOut = () => {
+        try{
+            logOut();
+            setCurrentUser(null);
+            navigate('/');
+        }catch(e){
+            setError(e.message);
+        }
+    }
 
     return(
         <div>
@@ -42,13 +55,16 @@ const Navbar = () => {
                 </ul>
                 </div>
             </div>
-            <div>
-                {currentUser ? <Link onClick={() => {
-                    logOut();
-                    setCurrentUser(null);
-                }} className="nav-link" to={'/'}>Log Out</Link> : <Link className="nav-link" to={'/authorization'}>Sign In</Link> }
+            <div className="d-flex ">
+                <div>
+                    {currentUser && <Link className="nav-link" to={'/dashboard'}>Profile</Link>}
+                </div>
+                <div>
+                    {currentUser ? <Link onClick={handleLogOut} className="nav-link" to={'/'}>Log Out</Link> : <Link className="nav-link" to={'/authorization'}>Sign In</Link> }
+                </div>
             </div>
         </nav>
+        {error && <Alert variant="danger">{error}</Alert>}
         <Outlet />
         </div>
     )

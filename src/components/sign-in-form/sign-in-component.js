@@ -32,7 +32,7 @@ const SignInForm = () => {
             const user = userCredential.user;
             console.log("signed in", user);
             setLoading(false);
-            navigate('/');
+            navigate('/dashboard');
         })
         .catch((e) => {
             setError('wrong email/password')
