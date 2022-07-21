@@ -10,6 +10,8 @@ import {
   signOut,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  updateEmail,
+  updatePassword,
 
 } from "firebase/auth";
 
@@ -82,6 +84,21 @@ export const resetPassword = (email) => {
   }
 }
 
+export const updateProfileEmail = (currentUser, email) => {
+    return updateEmail(currentUser, email).then(() => {
+      console.log('updated email')
+    }).catch((e) => {
+      console.log(e.message);
+    })
+}
+
+export const updateProfilePassword = (currentUser, password) => {
+    return updatePassword(currentUser, password).then(() => {
+      console.log('updated password')
+    }).catch((e) => {
+      console.log(e.message);
+    })
+}
 
 
 export const addUserDocFromAuth = async (authUser, userName ) => {

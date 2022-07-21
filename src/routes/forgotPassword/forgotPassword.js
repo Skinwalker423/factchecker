@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router";
 import { useRef, useState } from "react";
 import { Card, Button, Form, Container, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -13,8 +12,6 @@ const ForgotPassword = () => {
     const [message, setMessage] = useState('');
 
     const emailRef = useRef();
-
-    const navigate = useNavigate();
 
     const formHandler = async (e) => {
         e.preventDefault();

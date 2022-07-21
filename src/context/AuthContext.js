@@ -12,6 +12,7 @@ export const AuthProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [userName, setUserName] = useState('');
+    const [globalMessage, setGlobalMessage] = useState('');
 
     const signUp = (email, password) => {
         signUpWithEmailAndPassword(email, password);
@@ -36,7 +37,7 @@ export const AuthProvider = ({children}) => {
 
     
 
-    const value = {currentUser, setCurrentUser, signUp, userName, setUserName, addAuthToFirebase}
+    const value = {currentUser, setCurrentUser, signUp, userName, setUserName, addAuthToFirebase, globalMessage, setGlobalMessage}
 
     return (
         <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>
