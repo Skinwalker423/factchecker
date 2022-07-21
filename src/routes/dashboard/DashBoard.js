@@ -8,8 +8,10 @@ import { Link, useNavigate } from "react-router-dom";
 const DashBoard = () => {
 
     const [error, setError] = useState('');
-    const {currentUser, setCurrentUser} = useAuth();
+    const [show, setShow] = useState(true);
+    const {currentUser, setCurrentUser, globalMessage} = useAuth();
     const navigate = useNavigate();
+
 
     const handleLogOut = () => {
         try{
@@ -21,14 +23,15 @@ const DashBoard = () => {
         }
     }
 
-
     return (
         <Container>
             <Card>
                 <Card.Body>
                     <h1 className="text-center mb-4">Profile</h1>
                     {error && <Alert variant="danger">{error}</Alert>}
+                    {globalMessage && show && <Alert onClose={() => setShow(false)} dismissible variant="success">{globalMessage}</Alert>}
                     <Card.Title>Email: {currentUser.email}</Card.Title>
+                    <Card.Text>id: {currentUser.uid}</Card.Text>
                     <Link className="btn btn-primary w-100 mt-3" to={'/update-profile'}>Update</Link>
                 </Card.Body>
             </Card>

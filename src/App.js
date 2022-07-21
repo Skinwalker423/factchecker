@@ -9,6 +9,7 @@ import ForgotPassword from './routes/forgotPassword/forgotPassword';
 import DashBoard from './routes/dashboard/DashBoard';
 import { useAuth } from './context/AuthContext';
 import NavbarTwo from './routes/navbar/nav-react-component';
+import UpdateProfile from './routes/UpdateProfile/UpdateProfile';
 
 const App = () => {
 
@@ -25,6 +26,7 @@ const App = () => {
           <Route exact path='/' element={<NavbarTwo />}>
               <Route index element={<Home />} />
               <Route path='/dashboard' element={currentUser ? <DashBoard /> : <Authorization />} />
+              <Route path='/update-profile' element={currentUser ? <UpdateProfile /> : <Authorization />} />
               <Route path='donations' element={<Donations />} />
               <Route path='authorization' element={<Authorization />} />
               <Route path='forgotpassword' element={<ForgotPassword />} />
