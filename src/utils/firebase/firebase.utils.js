@@ -8,7 +8,8 @@ import {
   getRedirectResult,
   createUserWithEmailAndPassword,
   signOut,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 
 } from "firebase/auth";
 
@@ -70,6 +71,15 @@ export const signInWithGoogleRedirect = async () => {
 
 export const logOut = () => {
     signOut(auth);
+}
+
+export const resetPassword = (email) => {
+  try{
+    sendPasswordResetEmail(auth, email);
+    console.log('email sent to reset password')
+  }catch(e){
+    console.log(e.message);
+  }
 }
 
 

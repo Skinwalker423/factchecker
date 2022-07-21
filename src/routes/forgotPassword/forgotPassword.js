@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { useRef, useState } from "react";
 import { Card, Button, Form, Container, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { resetPassword } from "../../utils/firebase/firebase.utils";
 
 
 
@@ -9,6 +10,7 @@ import { Link } from "react-router-dom";
 const ForgotPassword = () => {
 
     const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
 
     const emailRef = useRef();
 
@@ -17,8 +19,9 @@ const ForgotPassword = () => {
     const formHandler = async (e) => {
         e.preventDefault();
         try{
-            console.log('reset form submitted');
-            navigate('/');
+            setMessage('');
+            resetPassword(emailRef.current.value);
+            setMessage('Check your inbox for further instructions')
         }catch(e){
             setError(e.message)
         }
@@ -31,6 +34,7 @@ const ForgotPassword = () => {
             <Card className="d-flex flex-column align-items-center justify-content-center mt-5 w-75">
                 <Card.Body className="w-100">
                     {error && <Alert variant="danger">{error}</Alert>}
+                    {message && <Alert variant="success">{message}</Alert>}
                     <Form onSubmit={formHandler}>
                         <h3 className="text-center">Reset Form</h3>
                         <Form.Group id='email' className="form-group">
